@@ -5,10 +5,10 @@ import com.rincentral.test.models.external.enums.FuelType;
 
 public class EngineCharacteristics {
 
-    public FuelType engineType;
-    public EngineType engineCylinders;
-    public Integer engineDisplacement;
-    public Integer engineHorsepower;
+    private FuelType engineType;
+    private EngineType engineCylinders;
+    private Integer engineDisplacement;
+    private Integer engineHorsepower;
 
     public EngineCharacteristics(FuelType engineType, EngineType engineCylinders, Integer engineDisplacement, Integer engineHorsepower) {
         this.engineType = engineType;
