@@ -1,5 +1,7 @@
 package com.rincentral.test.services;
 
+import com.rincentral.test.models.CarFullInfo;
+import com.rincentral.test.models.CarInfo;
 import com.rincentral.test.models.external.ExternalBrand;
 import com.rincentral.test.models.external.ExternalCar;
 import com.rincentral.test.models.external.ExternalCarInfo;
@@ -13,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -23,6 +26,19 @@ public class ExternalCarsApiService {
     private static final String CAR_BY_ID_URL = "http://localhost:8084/api/v1/cars/%d";
     private static final String ALL_BRANDS_URL = "http://localhost:8084/api/v1/brands";
     private final RestTemplate restTemplate = new RestTemplate();
+
+    // I've created Service & Repo for services like findAll/Save
+    // but task didn't ask to do it,
+    // so HashSet is used to have the unique data
+    private HashSet<CarFullInfo> carsCollection = new HashSet<CarFullInfo>();
+
+    public HashSet<CarFullInfo> getCarsCollection() {
+        return carsCollection;
+    }
+//HashSet<CarFullInfo> carsCollection
+    public void addToCollection(CarFullInfo car) {
+        carsCollection.add(car);
+    }
 
     public List<ExternalCar> loadAllCars() {
         try {
