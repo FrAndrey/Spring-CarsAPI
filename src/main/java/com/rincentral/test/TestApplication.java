@@ -1,8 +1,6 @@
 package com.rincentral.test;
 //by Andrey Fr, 2021
-import com.rincentral.test.models.BodyCharacteristics;
-import com.rincentral.test.models.CarFullInfo;
-import com.rincentral.test.models.EngineCharacteristics;
+import com.rincentral.test.models.*;
 import com.rincentral.test.models.external.ExternalBrand;
 import com.rincentral.test.models.external.ExternalCar;
 import com.rincentral.test.models.external.ExternalCarInfo;
@@ -35,12 +33,15 @@ public class TestApplication {
 			List<ExternalCar> externalCarCollection = api.loadAllCars();
 			List<ExternalBrand> externalBrandCollection = api.loadAllBrands();
 			//create a brand map based on id
-			Map<Integer, String> brandMap = new HashMap<>();
+			Map<Integer, Brand> brandMap = new HashMap<>();
 			//set map key values
 			for (ExternalBrand brand : externalBrandCollection) {
 				Integer id = brand.getId();
+				String brandName = brand.getTitle();
 				String country = brand.getCountry();
-				brandMap.put(id,country);
+				//match key with brand
+				Brand brandForMapping = new Brand(brandName,country);
+				brandMap.put(id,brandForMapping);
 			}
 				//There are other, cleaner ways to map the data, with fewer lines of code
 				// but I stick to this one - because I know it and it works
@@ -56,10 +57,14 @@ public class TestApplication {
 				internalCar.setId(id);
 				String segment = detailedExternalCar.getSegment();
 				internalCar.setSegment(segment);
-				//use HashMap for the brandId to convert it to country
 				Integer brandId = detailedExternalCar.getBrandId();
-				String country = brandMap.get(brandId);
+				internalCar.setBrandId(brandId);
+				//use HashMap for the brandId to convert it to country
+				String country = brandMap.get(brandId).getCountry();
 				internalCar.setCountry(country);
+				String brandName = brandMap.get(brandId).getTitle();
+				internalCar.setBrand(brandName);
+
 				String model = detailedExternalCar.getModel();
 				internalCar.setModel(model);
 				String generation = detailedExternalCar.getGeneration();
@@ -99,9 +104,9 @@ public class TestApplication {
 				Integer maxSpeed = detailedExternalCar.getMaxSpeed();
 				internalCar.setMaxSpeed(maxSpeed);
 				//add to HashSet
-				api.addToCollection(internalCar);
+				CarCollection.getInstance().addToArray(internalCar);
 			}
-			System.out.println(api.getCarsCollection().stream().count());
+			System.out.println(CarCollection.getInstance().getArray().stream().count());
 		};
 	}
 }
