@@ -1,18 +1,24 @@
 package com.rincentral.test.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
 public class BodyCharacteristics {
 
+    @JsonProperty("body_length")
     private Integer bodyLength;
-    private Integer bodyWidth;
-    private Integer bodyHeight;
-    private String bodyStyle;
 
-    public BodyCharacteristics(Integer bodyLength, Integer bodyWidth, Integer bodyHeight, String bodyStyle) {
-        this.bodyLength = bodyLength;
-        this.bodyWidth = bodyWidth;
-        this.bodyHeight = bodyHeight;
-        this.bodyStyle = bodyStyle;
-    }
+    @JsonProperty("body_width")
+    private Integer bodyWidth;
+
+    @JsonProperty("body_height")
+    private Integer bodyHeight;
+
+    @JsonProperty("body_style")
+    private String bodyStyle;
 
     public Integer getBodyLength() {
         return bodyLength;

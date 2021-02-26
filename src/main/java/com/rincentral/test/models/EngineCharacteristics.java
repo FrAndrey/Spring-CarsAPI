@@ -2,20 +2,17 @@ package com.rincentral.test.models;
 
 import com.rincentral.test.models.external.enums.EngineType;
 import com.rincentral.test.models.external.enums.FuelType;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
 public class EngineCharacteristics {
 
     private FuelType engineType;
     private EngineType engineCylinders;
     private Integer engineDisplacement;
     private Integer engineHorsepower;
-
-    public EngineCharacteristics(FuelType engineType, EngineType engineCylinders, Integer engineDisplacement, Integer engineHorsepower) {
-        this.engineType = engineType;
-        this.engineCylinders = engineCylinders;
-        this.engineDisplacement = engineDisplacement;
-        this.engineHorsepower = engineHorsepower;
-    }
 
     public FuelType getEngineType() {
         return engineType;
